@@ -1585,6 +1585,8 @@ async def process_appxwp(bot: Client, m: Message, user_id: int):
             await editable.edit(f"**Extracting course : {selected_batch_name} ...**")
             
             start_time = time.time()
+
+            
             
             headers = {
                 "Client-Service": "Appx",
