@@ -53,7 +53,7 @@ API_HASH = os.environ.get("API_HASH", "82134723a32b2cae76b9cfb3b1570745")
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "8367209194:AAG9KjF5v5ti8KCedqqiX1sVl1PlOed30c4")
 
 # Initialize Bot Globally (IMPORTANT FIX)
-bot = Client("bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
+bot = Client("my_bot_session", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN, in_memory=True)
 
 # Flask app for Render
 app = Flask(__name__)
