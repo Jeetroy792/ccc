@@ -5,7 +5,7 @@ pyromod
 ffmpeg
 mediainfo
 cloudscraper
-beautifulsoup4==4.12.2
+beautifulsoup4
 aiohttp
 aiofiles
 yt-dlp
