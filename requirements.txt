@@ -1,7 +1,7 @@
-pyrogram
+pyrogram>=2.0.106
 tgcrypto
 requests
-pyromod
+pyromod>=2.1.0
 cloudscraper
 beautifulsoup4
 aiohttp
