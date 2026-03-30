@@ -2,8 +2,6 @@ pyrogram
 tgcrypto
 requests
 pyromod
-ffmpeg
-mediainfo
 cloudscraper
 beautifulsoup4
 aiohttp
