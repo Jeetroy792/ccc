@@ -797,6 +797,7 @@ async def cpwp_callback(bot, callback_query):
     user_id = callback_query.from_user.id
     await callback_query.answer()
 
+try:
     auth_user = auth_users[0]
     user = await bot.get_users(auth_user)
     owner_username = "@" + user.username
