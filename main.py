@@ -1,3 +1,10 @@
+import asyncio
+
+try:
+    asyncio.get_running_loop()
+except RuntimeError:
+    asyncio.set_event_loop(asyncio.new_event_loop())
+
 import requests
 import asyncio
 import aiohttp
@@ -71,7 +78,6 @@ def run_flask():
 
 @bot.on_message(filters.command(["start"]))
 async def start(bot, message):
-  random_image_url = random.choice(image_list)
 
   keyboard = [
     [
@@ -87,9 +93,8 @@ async def start(bot, message):
 
   reply_markup = InlineKeyboardMarkup(keyboard)
 
-  await message.reply_photo(
-    photo=random_image_url,
-    caption="**PLEASE👇PRESS👇HERE**",
+  await message.reply_text(
+    text="**WELCOME! PLEASE👇PRESS👇HERE**",
     quote=True,
     reply_markup=reply_markup
   )
@@ -1666,8 +1671,31 @@ async def process_appxwp(bot: Client, m: Message, user_id: int):
 
 
 # Start Flask + Bot
+    # কোডের একদম শেষে এটি বসান
 if __name__ == "__main__":
-    threading.Thread(target=run_flask).start()
-    bot.run()
+    # Flask সার্ভার আলাদা থ্রেডে চালু করা
+    flask_thread = threading.Thread(target=run_flask)
+    flask_thread.daemon = True
+    flask_thread.start()
+    
+    # বোট চালু করার সঠিক পদ্ধতি (Python 3.10+ এর জন্য)
+    from pyrogram import idle
+    
+    async def start_bot():
+        try:
+            await bot.start()
+            print("--- BOT STARTED SUCCESSFULLY ---")
+            await idle()
+        finally:
+            if bot.is_connected:
+                await bot.stop()
+
+    try:
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(start_bot())
+    except KeyboardInterrupt:
+        logging.info("**Bot stopped by User...**")
+    except Exception as e:
+        logging.error(f"Bot failed to start: {e}")
                                         
 
